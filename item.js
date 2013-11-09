@@ -1,7 +1,7 @@
 (function (window) {
 
 	function Item(img_path, name, init_x, init_y) {
-		this.initialize(img_path, name, x, y);
+		this.initialize(img_path, name, init_x, init_y);
 	}
 
 	var p = Item.prototype = new createjs.Bitmap();
@@ -12,11 +12,13 @@
 // public properties:
 
 	p.name;			//the text name of the item
+	p.init_x;
+	p.init_y;
 
 // constructor:
 	p.Bitmap_initialize = p.initialize;	//unique to avoid overiding base class
 
-	p.initialize = function (img_path, name, x, y) {
+	p.initialize = function (img_path, name, init_x, init_y) {
 		this.Bitmap_initialize(img_path); // super call
 		this.name = name;
 		this.x = init_x;
