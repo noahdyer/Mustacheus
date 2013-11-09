@@ -54,9 +54,10 @@
 	<script>
 
 	//public variables
-	var backgroundImage;
-	
+	var backgroundImage;	
 	var item;
+	
+	var update = true;
 	
 	
 	var loadingInterval = 0;
@@ -138,9 +139,16 @@
 		//item.scaleX *= 10;
 		//item.scaleY *= 10;
 		item.on("mouseover", function(evt) {
-				this.scaleX = this.scaleY *= 1.2;
-				//update = true;
-			});
+			this.scaleX = this.scaleY *= 1.2;
+			update = true;
+			console.log("UPGRADE");
+		});
+		item.on("mouseout", function(evt) {
+			this.scaleX /=  1.2;
+			this.scaleY /= 1.2;
+			update = true;
+			console.log("DOWNGRADE");
+		});
 		 
 		
 		
@@ -236,11 +244,11 @@
 
 	// "update" function
 	function tick(event) {
-		//handle everything.
-		
-		
-		// dont forget to call outside ticks on "classes" if you have any
-		stage.update(event);
+		// this set makes it so the stage only re-renders when an event handler indicates a change has happened.
+		if (update) {
+			update = false; // only update once
+			stage.update(event);
+		}
 	}
 
 	function outOfBounds(o, bounds) {
