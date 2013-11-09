@@ -68,6 +68,8 @@
 	document.onkeyup = handleKeyUp;
 
 	var preload;
+	
+	var stage;
 
 	function init() {
 	    if (window.top != window) {
@@ -86,10 +88,13 @@
 	        document.getElementById("content").style.display = "none";
 	        return;
 		}
+		
+		
 
 		// loading.
 		canvas = document.getElementById("gameCanvas");
 		stage = new createjs.Stage(canvas);
+		stage.enableMouseOver(10);
 		messageField = new createjs.Text("Loading", "bold 24px Arial", "#FFFFFF");
 		messageField.maxWidth = 1000;
 		messageField.textAlign = "center";
@@ -125,11 +130,19 @@
 		messageField.text = "Welcome: Click to play";
 		
 		//background
-		backgroundImage = new createjs.Bitmap("assets/tempBackground.png");
+		backgroundImage = new createjs.Bitmap("assets/background.png");
 		//backgroundImage.x = 50;
 		//backgroundImage.y = 75;
 		
-		item = new Item("assets/tempBackground2.png", "Item1", 250, 250);
+		item = new Item("assets/fish.svg", "Item1", 425, 325);
+		//item.scaleX *= 10;
+		//item.scaleY *= 10;
+		item.on("mouseover", function(evt) {
+				this.scaleX = this.scaleY *= 1.2;
+				//update = true;
+			});
+		 
+		
 		
 		
 		// initialize variables for play
@@ -196,6 +209,7 @@
 		// item.
 		stage.addChild(item);
 		
+		
 		scoreField.text = (0).toString();
 		stage.addChild(scoreField);
 		
@@ -223,6 +237,7 @@
 	// "update" function
 	function tick(event) {
 		//handle everything.
+		
 		
 		// dont forget to call outside ticks on "classes" if you have any
 		stage.update(event);
