@@ -1,6 +1,6 @@
 (function (window) {
 
-	function Item(img_path, name, x, y) {
+	function Item(img_path, name, init_x, init_y) {
 		this.initialize(img_path, name, x, y);
 	}
 
@@ -12,7 +12,6 @@
 // public properties:
 
 	p.name;			//the text name of the item
-	p.position;		//average radial disparity
 
 // constructor:
 	p.Bitmap_initialize = p.initialize;	//unique to avoid overiding base class
@@ -20,8 +19,10 @@
 	p.initialize = function (img_path, name, x, y) {
 		this.Bitmap_initialize(img_path); // super call
 		this.name = name;
-		this.x = x;
-		this.y = y;
+		this.x = init_x;
+		this.y = init_y;
+		this.init_x = init_x;
+		this.init_y - init_y;
 
 		//this.activate(size); // from spacerock, I don't think it's necessary
 	}
